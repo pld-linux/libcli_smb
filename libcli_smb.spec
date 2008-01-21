@@ -1,13 +1,13 @@
-
 Summary:	libcli_smb - samba client library
 Summary(pl.UTF-8):	libcli_smb - biblioteka klienta samby
 Name:		libcli_smb
 Version:	4.0.0
-Release:	0.alpha1.1
+%define	subver	alpha1
+Release:	0.%{subver}.1
 Epoch:		1
 License:	GPL v3
 Group:		Libraries
-Source0:	http://us1.samba.org/samba/ftp/samba4/samba-4.0.0alpha1.tar.gz
+Source0:	http://us1.samba.org/samba/ftp/samba4/samba-%{version}%{subver}.tar.gz
 # Source0-md5:	a72ddbc13bf2c95e303a2e609e8161b0
 URL:		http://www.samba.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -16,12 +16,11 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 libcli_smb - library that allows to use samba clients functions.
 
 %description -l pl.UTF-8
-libcli_smb - biblioteka pozwalająca korzystać z funcji klienta
-samby.
+libcli_smb - biblioteka pozwalająca korzystać z funcji klienta samby.
 
 %package devel
-Summary:	libcli_smb - samba client library
-Summary(pl.UTF-8):	libcli_smb - biblioteka klienta samby
+Summary:	Header files for libcli_smb samba client library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki klienta samby libcli_smb
 Summary(pt_BR.UTF-8):	Ferramentas de desenvolvimento para clientes samba
 Group:		Development/Libraries
 Requires:	libcli_smb = %{epoch}:%{version}-%{release}
@@ -30,19 +29,19 @@ Requires:	libcli_smb = %{epoch}:%{version}-%{release}
 Header files for libcli_smb.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe dla libcli_smb.
+Pliki nagłówkowe biblioteki libcli_smb.
 
 %description devel -l pt_BR.UTF-8
-Arquivos de inclusão, bibliotecas e documentação necessários para
-desenvolver aplicativos clientes para o samba.
+Arquivos de inclusão necessários para desenvolver aplicativos clientes
+para o samba.
 
 %prep
-%setup -q -n samba-4.0.0alpha1
+%setup -q -n samba-%{version}%{subver}
 
 %build
 cd source
 %configure \
-	 -C \
+	-C \
 	--enable-developer \
 	--enable-socket-wrapper \
 	--with-privatedir=%{_sysconfdir}/samba
@@ -99,4 +98,4 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libcli_smb.so
-%{_includedir}
+%{_includedir}/samba4
