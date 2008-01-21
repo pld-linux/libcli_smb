@@ -1,15 +1,23 @@
+# TODO:
+# - reduce headers set
+# - shared talloc (>= 1.1.0), tdb (>= 1.1.0), ldb (>= 0.9.1)
 Summary:	libcli_smb - samba client library
 Summary(pl.UTF-8):	libcli_smb - biblioteka klienta samby
 Name:		libcli_smb
 Version:	4.0.0
-%define	subver	alpha1
+%define	subver	alpha2
 Release:	0.%{subver}.1
 Epoch:		1
-License:	GPL v3
+License:	GPL v3+
 Group:		Libraries
 Source0:	http://us1.samba.org/samba/ftp/samba4/samba-%{version}%{subver}.tar.gz
-# Source0-md5:	a72ddbc13bf2c95e303a2e609e8161b0
+# Source0-md5:	90dec861198d7732a0e684f8b9c27bf5
 URL:		http://www.samba.org/
+BuildRequires:	cyrus-sasl-devel
+BuildRequires:	gnutls-devel
+BuildRequires:	libaio-devel
+BuildRequires:	pam-devel
+BuildRequires:	pkgconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -93,7 +101,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libcli_smb.so.*
+%attr(755,root,root) %{_libdir}/libcli_smb.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libcli_smb.so.0
 
 %files devel
 %defattr(644,root,root,755)
